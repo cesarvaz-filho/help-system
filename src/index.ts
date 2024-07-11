@@ -13,6 +13,14 @@ server.register(cors, {
   allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
   credentials: true,
 });
+
+// Tratamento de opções preflight
+server.options('*', (request, reply) => {
+  reply.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  reply.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  reply.send();
+});
+
 server.register(userRoutes);
 server.register(helpRequestRoutes);
 server.register(helpResponseRoutes);
