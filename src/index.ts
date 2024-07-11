@@ -2,11 +2,8 @@ import Fastify from 'fastify';
 import userRoutes from './routes/userRoutes';
 import helpRequestRoutes from './routes/helpRequestRoutes';
 import helpResponseRoutes from './routes/helpResponseRoutes';
-import cors from 'fastify-cors';
 
 const server = Fastify();
-
-
 
 server.register(userRoutes);
 server.register(helpRequestRoutes);
