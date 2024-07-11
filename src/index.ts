@@ -2,8 +2,24 @@ import Fastify from 'fastify';
 import userRoutes from './routes/userRoutes';
 import helpRequestRoutes from './routes/helpRequestRoutes';
 import helpResponseRoutes from './routes/helpResponseRoutes';
+import cors from 'fastify-cors';
 
 const server = Fastify();
+
+
+server.register(cors, {
+  origin: '*', // Permitir todas as origens
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+  credentials: true,
+});
+
+// Tratamento de opções preflight
+server.options('*', (request, reply) => {
+  reply.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  reply.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  reply.send();
+});
 
 server.register(userRoutes);
 server.register(helpRequestRoutes);
