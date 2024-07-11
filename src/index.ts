@@ -6,16 +6,18 @@ import cors from 'fastify-cors';
 
 const server = Fastify();
 
+
+
+server.register(userRoutes);
+server.register(helpRequestRoutes);
+server.register(helpResponseRoutes);
+
 server.register(cors, {
   origin: '*', // Permitir todas as origens
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
   credentials: true,
 });
-
-server.register(userRoutes);
-server.register(helpRequestRoutes);
-server.register(helpResponseRoutes);
 
 server.listen({ port: 3000 }, (err, address) => {
   if (err) {
