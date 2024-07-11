@@ -2,10 +2,16 @@ import Fastify from 'fastify';
 import userRoutes from './routes/userRoutes';
 import helpRequestRoutes from './routes/helpRequestRoutes';
 import helpResponseRoutes from './routes/helpResponseRoutes';
-import cors from 'fastify-cors';
+import fastifyCors from 'fastify-cors';
 
 const server = Fastify();
 
+server.register(fastifyCors, {
+  origin: '*', // Permitir todas as origens
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+  credentials: true,
+});
 
 server.register(userRoutes);
 server.register(helpRequestRoutes);
